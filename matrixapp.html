@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix | App</title>
+</head>
+<body>
+    <h1>Matrix Sum App</h1>
+
+    <form onsubmit="start(); return false">
+        <input type="number" required min="2" id="input-1">
+        X
+        <input type="number" required min="2" id="input-2">
+
+        <button type="submit">Start</button>
+    </form>
+
+    <form onsubmit="sum(); return false" id="matrixapp">
+        <div id="suminput1"></div>
+        +
+        <div id="suminput2"></div>
+
+        <button>SUM</button>
+
+        <div id="sumresult"></div>
+    </form>
+
+    <script>
+        let inputOne = "";
+        let inputTwo = "";
+
+        function start() {
+            
+            let sumInputOne = document.getElementById("suminput1");
+            let sumInputTwo = document.getElementById("suminput2");
+            let sumResult = document.getElementById("sumresult");
+
+
+            inputOne = document.getElementById("input-1").value;
+            inputTwo = document.getElementById("input-2").value;
+
+            if (inputOne !== inputTwo) {
+                alert("Please enter the same number for both inputs");
+                return;
+            }
+ 
+            if (isNaN(inputOne) || isNaN(inputTwo)) {
+                alert("Please enter a number");
+                return;
+            }
+
+            if (inputOne < 2 || inputTwo < 2) {
+                alert("Please enter a number greater than 1");
+                return;
+            }
+
+            for ( let i = 0; i < inputOne; i++) {
+                for ( let j = 0; j < inputTwo; j++ ) {
+                    sumInputOne.innerHTML += `<input type="number" required min="0" max="100" id="matrix1-${i}-${j}" value="0">`;
+
+                    sumInputOne.innerHTML += `<input type="number" required min="0" max="100" id="matrix2-${i}-${j}" value="0">`;
+
+                    sumInputOne.innerHTML += `<input type="number" disabled required min="0" max="100" id="matrix3-${i}-${j}" value="0">`;
+                }
+                sumInputOne.innerHTML += `<br>`;
+                sumInputTwo.innerHTML += `<br>`;
+                sumResult.innerHTML += `<br>`;
+                
+            }
+            document.getElementById("matrixapp");
+        }
+
+        function sum() {
+
+            for ( let i = 0; i < inputOne; i++) {
+                for ( let j = 0; j < inputTwo; j++ ) {
+                    document.getElementById("matrix3-${i}-${j}").value =
+                    +document.getElementById("matrix1-${i}-${j}").value
+                    +document.getElementById("matrix2-${i}-${j}").value ;
+                }
+            }
+        }
+    </script>
+
+
+    
+</body>
+</html>
